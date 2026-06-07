@@ -13,7 +13,7 @@ function App() {
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-gray-100 selection:bg-indigo-100 selection:text-indigo-600">
+          <div className="min-h-screen bg-gray-100 selection:bg-indigo-100 selection:text-indigo-600 overflow-x-hidden">
             <Navbar />
             <main>
               <Routes>

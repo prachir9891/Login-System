@@ -44,20 +44,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 bg-gray-100">
-      <div className="max-w-5xl w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+    <div className="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-8 bg-gray-100 overflow-x-hidden">
+      <div className="max-w-5xl w-full bg-white rounded-xl sm:rounded-2xl md:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[500px] sm:min-h-[600px]">
         
         {/* Left side (Form Section) */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-          <div>
-            <div className="space-y-2 mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 leading-tight">
+        <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col justify-center overflow-x-hidden">
+          <div className="min-w-0">
+            <div className="space-y-2 mb-6 sm:mb-8">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
                 Holla,<br />Welcome Back
               </h1>
-              <p className="text-gray-500">Hey, welcome back to your special place</p>
+              <p className="text-gray-500 text-sm sm:text-base">Hey, welcome back to your special place</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {error && (
                 <div className="bg-red-50 text-red-500 p-3 rounded-lg text-sm border border-red-100 animate-pulse">
                   {error}

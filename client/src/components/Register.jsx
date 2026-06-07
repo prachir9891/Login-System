@@ -23,14 +23,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 bg-gray-100 font-inter">
-      <div className="max-w-md w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden p-8 md:p-12">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 font-poppins">Create Account</h1>
-          <p className="text-gray-500">Join our secure community today</p>
+    <div className="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-8 bg-gray-100 font-inter overflow-x-hidden">
+      <div className="max-w-md w-full bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden p-6 sm:p-8 md:p-12">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 font-poppins">Create Account</h1>
+          <p className="text-gray-500 text-sm sm:text-base">Join our secure community today</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
           {error && (
             <div className="bg-red-50 text-red-500 p-3 rounded-xl text-sm border border-red-100 text-center">
               {error}
@@ -90,7 +90,7 @@ const Register = () => {
           </button>
         </form>
 
-        <div className="mt-8 text-center text-gray-500 text-sm">
+        <div className="mt-6 sm:mt-8 text-center text-gray-500 text-xs sm:text-sm">
           Already have an account?{' '}
           <Link to="/login" className="text-indigo-600 font-semibold hover:underline">Sign In</Link>
         </div>
