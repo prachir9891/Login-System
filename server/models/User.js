@@ -29,6 +29,12 @@ const UserSchema = new mongoose.Schema({
 // Hash password before saving
 UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
+  
+  // Validate password exists and is not empty
+  if (!this.password || this.password.trim() === '') {
+    return next(new Error('Password cannot be empty'));
+  }
+  
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -40,6 +46,9 @@ UserSchema.pre('save', async function(next) {
 
 // Compare password method
 UserSchema.methods.comparePassword = async function(enteredPassword) {
+  if (!this.password) {
+    throw new Error('Password not set for this user');
+  }
   return await bcrypt.compare(enteredPassword, this.password);
 };
 

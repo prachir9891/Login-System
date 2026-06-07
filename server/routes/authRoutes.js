@@ -59,6 +59,11 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'Please provide email and password' });
     }
     
+    // Trim and validate password
+    if (password.trim().length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    }
+    
     email = email.toLowerCase();
     console.log('Registration attempt for:', email);
     
@@ -105,9 +110,15 @@ router.post('/login', async (req, res) => {
     email = email.toLowerCase();
     console.log('Login attempt:', email);
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
       console.log('Login failed: User not found');
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Ensure password field exists
+    if (!user.password) {
+      console.log('Login failed: User has no password set');
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
@@ -129,6 +140,7 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (err) {
+    console.error('Login error:', err.message);
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
