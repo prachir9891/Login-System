@@ -66,6 +66,17 @@ const Dashboard = () => {
       <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
         {/* Top Header */}
         <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 p-4 md:px-8 sticky top-0 z-10">
+          {/* Mobile Logout Button (Above Search) */}
+          <div className="md:hidden mb-3">
+            <button 
+              onClick={logout}
+              className="w-full flex items-center justify-center gap-2 px-3 py-2.5 text-red-500 hover:bg-red-50 rounded-lg font-semibold transition-colors border border-red-200"
+            >
+              <LogOut size={18} />
+              <span>Logout</span>
+            </button>
+          </div>
+
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-xl flex-1 max-w-full sm:max-w-md border border-gray-100 min-w-0">
               <Search className="text-gray-400 w-5 h-5 flex-shrink-0" />

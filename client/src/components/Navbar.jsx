@@ -57,14 +57,6 @@ const Navbar = () => {
               <span className="text-gray-900 font-semibold text-sm truncate">{user.username}</span>
             </div>
           )}
-
-          {/* Logout Button Below Profile (Mobile Only) */}
-          {user && (
-            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-3 py-2.5 text-red-500 hover:bg-red-50 rounded-lg font-semibold transition-colors">
-              <LogOut size={18} />
-              <span>Logout</span>
-            </button>
-          )}
         </div>
 
         {/* Desktop Layout: Horizontal */}
