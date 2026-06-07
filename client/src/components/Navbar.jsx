@@ -48,7 +48,17 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Bottom Row: Logout Button (Mobile Only) */}
+          {/* User Profile Section (Mobile Only) */}
+          {user && (
+            <div className="flex items-center gap-3 px-3 py-2.5 bg-gray-50 rounded-lg">
+              <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <User size={16} />
+              </div>
+              <span className="text-gray-900 font-semibold text-sm truncate">{user.username}</span>
+            </div>
+          )}
+
+          {/* Logout Button Below Profile (Mobile Only) */}
           {user && (
             <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-3 py-2.5 text-red-500 hover:bg-red-50 rounded-lg font-semibold transition-colors">
               <LogOut size={18} />
