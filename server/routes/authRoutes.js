@@ -54,17 +54,42 @@ router.post('/google-login', async (req, res) => {
 // Register
 router.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    let { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Please provide email and password' });
+    }
+    
+    email = email.toLowerCase();
+    console.log('Registration attempt for:', email);
     
     // Check if user exists
     let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ message: 'User already exists' });
+    if (user) {
+      console.log('Registration failed: User already exists');
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
-    user = new User({ username, email, password });
+    // Generate a unique username from email prefix
+    const baseUsername = email.split('@')[0];
+    let uniqueUsername = baseUsername;
+    let counter = 1;
+    
+    while (await User.findOne({ username: uniqueUsername })) {
+      uniqueUsername = `${baseUsername}${counter}`;
+      counter++;
+    }
+
+    user = new User({ 
+      username: uniqueUsername, 
+      email, 
+      password 
+    });
     await user.save();
+    console.log('Registration successful for:', email);
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
+    console.error('Registration error:', err.message);
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
@@ -72,15 +97,28 @@ router.post('/register', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Please provide email and password' });
+    }
+
+    email = email.toLowerCase();
+    console.log('Login attempt:', email);
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!user) {
+      console.log('Login failed: User not found');
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
 
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      console.log('Login failed: Password mismatch');
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    console.log('Login successful for:', email);
 
     res.json({
       token,

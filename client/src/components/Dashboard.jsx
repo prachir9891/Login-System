@@ -83,21 +83,20 @@ const Dashboard = () => {
             <div className="h-8 w-px bg-gray-200 mx-2"></div>
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-bold text-gray-900">{user.username}</p>
+                <p className="text-sm font-bold text-gray-900">{user?.username}</p>
                 <p className="text-xs text-gray-500">Administrator</p>
               </div>
               <div className="w-10 h-10 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-100">
-                {user.username.charAt(0).toUpperCase()}
+                {user?.username?.charAt(0).toUpperCase() || 'U'}
               </div>
             </div>
           </div>
         </header>
 
-        {/* Content Area */}
         <div className="p-4 md:p-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-poppins">Welcome back, {user.username}! 👋</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-poppins">Welcome back, {user?.username}! 👋</h2>
               <p className="text-gray-500 mt-1">Here's what's happening with your account today.</p>
             </div>
             <div className="flex gap-3">
