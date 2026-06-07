@@ -5,7 +5,8 @@
     "server": "npm start --prefix server",
     "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install-all": "npm install && npm install --prefix server && npm install --prefix client"
+    "build": "npm install && npm install --prefix client && npm install --prefix server && npm run build --prefix client",
+    "start": "node server/index.js"
   },
   "dependencies": {
     "concurrently": "^8.2.2"

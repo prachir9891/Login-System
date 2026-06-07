@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5030';
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     if (token) {
       axios.get(`${API_URL}/api/auth/user`, {
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5030';
+    const API_URL = import.meta.env.VITE_API_URL || '';
     const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
     localStorage.setItem('token', res.data.token);
     setUser(res.data.user);
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const googleLogin = async (tokenId) => {
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5030';
+    const API_URL = import.meta.env.VITE_API_URL || '';
     const res = await axios.post(`${API_URL}/api/auth/google-login`, { tokenId });
     localStorage.setItem('token', res.data.token);
     setUser(res.data.user);
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (username, email, password) => {
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5030';
+    const API_URL = import.meta.env.VITE_API_URL || '';
     await axios.post(`${API_URL}/api/auth/register`, { username, email, password });
   };
 
